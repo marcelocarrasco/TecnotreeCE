@@ -1,0 +1,12 @@
+#Logs
+/PentahoLogs/*
+*.log
+
+#Others
+/Datos/arce/tpsfiles/*
+/Datos/pyce/tpsfiles/*
+/Datos/uyce/tpsfiles/*
+*.gz
+
+
+
