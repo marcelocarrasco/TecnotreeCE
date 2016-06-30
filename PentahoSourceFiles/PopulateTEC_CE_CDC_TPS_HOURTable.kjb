@@ -162,7 +162,7 @@
       <limit>0</limit>
       <is_custom_sql>Y</is_custom_sql>
       <is_usevars>N</is_usevars>
-      <custom_sql>SELECT nombre_csv&#xa;FROM files&#xa;WHERE status &#x3d; 5&#xa;AND procesado is null&#xa;AND nombre_csv like &#x27;&#x25;&#x2f;TecnotreeCE&#x2f;&#x25;&#x27;&#xa;AND row_num &#x3e; 1</custom_sql>
+      <custom_sql>SELECT nombre_csv&#xa;FROM files&#xa;WHERE status &#x3d; 5&#xa;AND procesado is null&#xa;AND nombre_csv like &#x27;&#x25;&#x2f;TecnotreeCE&#x2f;&#x25;&#x27;&#xa;--AND row_num &#x3e; 1</custom_sql>
       <add_rows_result>N</add_rows_result>
       <clear_result_rows>Y</clear_result_rows>
       <parallel>N</parallel>
