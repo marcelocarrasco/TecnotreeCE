@@ -9,6 +9,13 @@ v_end varchar2(20 char) := '07-JAN-2016 00:00:00';
 max_tps number := 0;
 start_dtime varchar2(20 char) := '';
 end_dtime varchar2(20 char) := '';
+v_max_cap_hw_arg number := 0;
+v_max_cap_hw_pry number := 0;
+v_max_cap_hw_ury number := 0;
+v_max_cap_sw_arg number := 0;
+v_max_cap_sw_pry number := 0;
+v_max_cap_sw_ury number := 0;
+
 begin
   while v_start_dtime != v_end loop
   begin
@@ -18,17 +25,36 @@ begin
           end_dtime
     from dual;
     --
-    insert into TEC_CE_CDC_TPS_AUX_TEMPLATE(start_dtime,END_DTIME,pais,max_tps)
-    values (START_DTIME,END_DTIME,'ARG',0);
+    select  max_cap_hw,
+            max_cap_sw
+    into    v_max_cap_hw_arg,
+            v_max_cap_sw_arg
+    from    sva_objects
+    where   pais = 'ARG';
     --
-    insert into TEC_CE_CDC_TPS_AUX_TEMPLATE(start_dtime,END_DTIME,pais,max_tps)
-    values (START_DTIME,END_DTIME,'PRY',0);
+    select  max_cap_hw,
+            max_cap_sw
+    into    v_max_cap_hw_pry,
+            v_max_cap_sw_pry
+    from    sva_objects
+    where   pais = 'PRY';
     --
-    insert into TEC_CE_CDC_TPS_AUX_TEMPLATE(start_dtime,END_DTIME,pais,max_tps)
-    values (START_DTIME,END_DTIME,'URY',0);
---    dbms_output.put_line('insert into tec_ce_plantilla (id_col,start_dtime,end_dtime,pais,max_tps) values ('||
---                          DBMS_OBFUSCATION_TOOLKIT.MD5(input => UTL_RAW.CAST_TO_RAW (START_DTIME || END_DTIME ||'ARG'))||','
---                          ||start_dtime||','||end_dtime||',ARG,'||to_char(max_tps)||');');
+    select  max_cap_hw,
+            max_cap_sw
+    into    v_max_cap_hw_ury,
+            v_max_cap_sw_ury
+    from    sva_objects
+    where   pais = 'URY';
+    --
+    insert into TEC_CE_CDC_TPS_AUX_TEMPLATE(start_dtime,END_DTIME,pais,max_tps,max_cap_hw,max_cap_sw)
+    values (START_DTIME,END_DTIME,'ARG',0,v_max_cap_hw_arg,v_max_cap_sw_arg);
+    --
+    insert into TEC_CE_CDC_TPS_AUX_TEMPLATE(start_dtime,END_DTIME,pais,max_tps,max_cap_hw,max_cap_sw)
+    values (START_DTIME,END_DTIME,'PRY',0,v_max_cap_hw_pry,v_max_cap_sw_pry);
+    --
+    insert into TEC_CE_CDC_TPS_AUX_TEMPLATE(start_dtime,END_DTIME,pais,max_tps,max_cap_hw,max_cap_sw)
+    values (START_DTIME,END_DTIME,'URY',0,v_max_cap_hw_ury,v_max_cap_sw_ury);
+
     v_start_dtime := end_dtime;
     --DBMS_OUTPUT.PUT_LINE('new start_dtime '||v_start_dtime);
   end;

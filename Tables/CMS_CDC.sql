@@ -1,3 +1,20 @@
+-- SVA_OBJECT
+
+create table SVA_OBJECTS(
+FECHA       DATE DEFAULT SYSDATE NOT NULL,
+MAX_CAP_HW  number NOT NULL,
+MAX_CAP_SW  number NOT NULL,
+TECNOLOGIA  VARCHAR2(100 CHAR) NOT NULL,
+PAIS        CHAR(3 CHAR) NOT NULL,
+ACTIVO      NUMBER(1) DEFAULT 1 NOT NULL CHECK (ACTIVO IN (1,0))) NOLOGGING;
+
+INSERT INTO SVA_OBJECTS (MAX_CAP_HW,MAX_CAP_SW,TECNOLOGIA,PAIS)
+VALUES (2400,2000,'TECNOTREECE','ARG');
+INSERT INTO SVA_OBJECTS (MAX_CAP_HW,MAX_CAP_SW,TECNOLOGIA,PAIS)
+VALUES (2400,2000,'TECNOTREECE','PRY');
+INSERT INTO SVA_OBJECTS (MAX_CAP_HW,MAX_CAP_SW,TECNOLOGIA,PAIS)
+VALUES (2400,2000,'TECNOTREECE','URY');
+
 
 -- drop table TEC_CE_CDC_TPS_AUX;
 
@@ -10,7 +27,11 @@ PAIS	      char(3 char) GENERATED ALWAYS AS (CASE  WHEN instr(ARCHIVO,'/arce/') 
                                                     ELSE 'S/P'
                                               END) VIRTUAL,
 MAX_TPS	    number,
-ARCHIVO     varchar2(500 char));
+MAX_CAP_HW  number,
+MAX_CAP_SW  number,
+UTIL_HW     number(10,2) generated always as (MAX_TPS / MAX_CAP_HW) virtual,
+UTIL_SW     number(10,2) generated always as (MAX_TPS / MAX_CAP_SW) virtual,
+ARCHIVO     varchar2(500 char))nologging;
 --PARTITION BY RANGE (START_DTIME) 
 --INTERVAL(NUMTODSINTERVAL (1, 'DAY'))
 --(  
@@ -24,7 +45,11 @@ create table TEC_CE_CDC_TPS_AUX_TEMPLATE(
 START_DTIME	varchar2(20 char),
 END_DTIME	  varchar2(20 char),
 PAIS        varchar2(3 char),
-MAX_TPS	    number) nologging;
+MAX_TPS	    number,
+MAX_CAP_HW  number,
+MAX_CAP_SW  number,
+UTIL_HW     number(10,2) generated always as (MAX_TPS / MAX_CAP_HW) virtual,
+UTIL_SW     number(10,2) generated always as (MAX_TPS / MAX_CAP_SW) virtual) nologging;
 
 alter table TEC_CE_CDC_TPS_AUX_TEMPLATE add constraint TEC_CE_CDC_TPS_AUX_TEMPLATE_PK primary key (pais,start_dtime,end_dtime);
 --
