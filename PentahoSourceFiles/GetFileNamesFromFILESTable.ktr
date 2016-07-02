@@ -133,7 +133,7 @@
            <schema_name/>
            </partitioning>
     <connection>falda.claro.amx</connection>
-    <sql>SELECT nombre_csv&#xa;FROM files&#xa;WHERE status &#x3d; 5&#xa;AND procesado is null&#xa;AND nombre_csv like &#x27;&#x25;&#x2f;TecnotreeCE&#x2f;&#x25;CDC&#x25;&#x27;&#xa;--AND row_num &#x3d; 1</sql>
+    <sql>SELECT	nombre_csv,&#xa;		to_char&#x28;to_date&#x28;substr&#x28;nombre_csv,-12,8&#x29;,&#x27;ddmmyyyy&#x27;&#x29;,&#x27;DD-MON-YYYY HH24&#x3a;MI&#x3a;SS&#x27;&#x29; P_FECHA_INI,&#xa;		0 P_RESULTADO&#xa;FROM files&#xa;WHERE status &#x3d; -1&#xa;AND procesado is null&#xa;AND nombre_csv like &#x27;&#x25;&#x2f;TecnotreeCE&#x2f;&#x25;CDC&#x25;&#x27;&#xa;--AND row_num &#x3d; 1</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -166,6 +166,12 @@
     <fields>
       <field>
         <name>NOMBRE_CSV</name>
+        </field>
+      <field>
+        <name>P_FECHA_INI</name>
+        </field>
+      <field>
+        <name>P_RESULTADO</name>
         </field>
       </fields>
      <cluster_schema/>

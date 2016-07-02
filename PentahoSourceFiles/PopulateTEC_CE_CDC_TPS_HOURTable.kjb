@@ -87,8 +87,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>880</xloc>
-      <yloc>192</yloc>
+      <xloc>624</xloc>
+      <yloc>336</yloc>
       </entry>
     <entry>
       <name>Get File Names From FILES Table</name>
@@ -120,8 +120,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>592</xloc>
-      <yloc>192</yloc>
+      <xloc>912</xloc>
+      <yloc>176</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -130,8 +130,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>880</xloc>
-      <yloc>400</yloc>
+      <xloc>352</xloc>
+      <yloc>336</yloc>
       </entry>
     <entry>
       <name>Truncate TEC_CE_CDC_TPS_AUX table</name>
@@ -202,6 +202,57 @@
       <xloc>64</xloc>
       <yloc>32</yloc>
       </entry>
+    <entry>
+      <name>Populate TEC_CE_CDC_AUX_TEMPLATE Table</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;PopulateTEC_CE_CDC_AUX_TEMPLATETable.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>912</xloc>
+      <yloc>336</yloc>
+      </entry>
+    <entry>
+      <name>Truncate TEC_CE_CDC_TPS_AUX_TEMPLATE table</name>
+      <description/>
+      <type>TRUNCATE_TABLES</type>
+      <connection>falda.claro.amx</connection>
+      <arg_from_previous>N</arg_from_previous>
+      <fields>
+        <field>
+          <name>TEC_CE_CDC_TPS_AUX_TEMPLATE</name>
+          <schemaname>mcarrasco</schemaname>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>592</xloc>
+      <yloc>176</yloc>
+      </entry>
   </entries>
   <hops>
     <hop>
@@ -236,12 +287,30 @@
       <to>Get File Names From FILES Table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
+      <enabled>N</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Populate TEC_CE_CDC_TPS_AUX Table</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>Get File Names From FILES Table</from>
+      <to>Populate TEC_CE_CDC_AUX_TEMPLATE Table</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Populate TEC_CE_CDC_AUX_TEMPLATE Table</from>
       <to>Populate TEC_CE_CDC_TPS_AUX Table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -250,8 +319,17 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Populate TEC_CE_CDC_TPS_AUX Table</from>
-      <to>Success</to>
+      <from>Truncate TEC_CE_CDC_TPS_AUX table</from>
+      <to>Truncate TEC_CE_CDC_TPS_AUX_TEMPLATE table</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Truncate TEC_CE_CDC_TPS_AUX_TEMPLATE table</from>
+      <to>Get File Names From FILES Table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

@@ -1,12 +1,13 @@
 insert into TEC_CE_CDC_TPS_HOUR (START_DTIME,END_DTIME,PAIS,MAX_TPS)--,ARCHIVO)
 select START_DTIME,END_DTIME,PAIS,MAX_TPS--,'TEMPLATE'
-from tec_ce_cdc_tps_aux_template
-where pais = 'URY'
-and substr(start_dtime,1,11) = '06-JAN-2016'
-and (START_DTIME,END_DTIME,PAIS) not in (select START_DTIME,END_DTIME,PAIS 
-                                        from tec_ce_cdc_tps_aux 
-                                        where pais = 'URY'
-                                        and substr(start_dtime,1,11) = '06-JAN-2016');
+from tec_ce_cdc_tps_aux_template tat
+where  --substr(start_dtime,1,11) = '06-JAN-2016'
+--and 
+(START_DTIME,END_DTIME,PAIS) not in (select START_DTIME,END_DTIME,PAIS 
+                                        from tec_ce_cdc_tps_aux ta
+                                        where ta.pais = tat.pais
+                                        --and substr(start_dtime,1,11) = '06-JAN-2016'
+                                        );
                                         
 insert into TEC_CE_CDC_TPS_HOUR (START_DTIME,END_DTIME,PAIS,MAX_TPS)
 select START_DTIME,END_DTIME,PAIS,MAX_TPS--,'TEMPLATE'

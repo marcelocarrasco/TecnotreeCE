@@ -259,7 +259,7 @@
     <name>Table TEC_CE_CDC_TPS_AUX output</name>
     <type>TableOutput</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
