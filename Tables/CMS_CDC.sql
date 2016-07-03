@@ -2,8 +2,8 @@
 
 create table SVA_OBJECTS(
 FECHA       DATE DEFAULT SYSDATE NOT NULL,
-MAX_CAP_HW  number NOT NULL,
-MAX_CAP_SW  number NOT NULL,
+MAX_CAP_HW  NUMBER NOT NULL,
+MAX_CAP_SW  NUMBER NOT NULL,
 TECNOLOGIA  VARCHAR2(100 CHAR) NOT NULL,
 PAIS        CHAR(3 CHAR) NOT NULL,
 ACTIVO      NUMBER(1) DEFAULT 1 NOT NULL CHECK (ACTIVO IN (1,0))) NOLOGGING;
@@ -19,19 +19,19 @@ VALUES (2400,2000,'TECNOTREECE','URY');
 -- drop table TEC_CE_CDC_TPS_AUX;
 
 create table TEC_CE_CDC_TPS_AUX(
-START_DTIME	varchar2(20 char),
-END_DTIME   varchar2(20 char),
-PAIS	      char(3 char) GENERATED ALWAYS AS (CASE  WHEN instr(ARCHIVO,'/arce/') != 0 THEN 'ARG'
+START_DTIME	VARCHAR2(20 CHAR),
+END_DTIME   VARCHAR2(20 CHAR),
+PAIS	      CHAR(3 CHAR) GENERATED ALWAYS AS (CASE  WHEN instr(ARCHIVO,'/arce/') != 0 THEN 'ARG'
                                                     WHEN instr(ARCHIVO,'/pyce/') != 0 THEN 'PRY'
                                                     WHEN instr(ARCHIVO,'/uyce/') != 0 THEN 'URY'
                                                     ELSE 'S/P'
                                               END) VIRTUAL,
-MAX_TPS	    number,
-MAX_CAP_HW  number,
-MAX_CAP_SW  number,
-UTIL_HW     number(10,2) generated always as (MAX_TPS / MAX_CAP_HW) virtual,
-UTIL_SW     number(10,2) generated always as (MAX_TPS / MAX_CAP_SW) virtual,
-ARCHIVO     varchar2(500 char))nologging;
+MAX_TPS	    NUMBER,
+MAX_CAP_HW  NUMBER DEFAULT 1,
+MAX_CAP_SW  NUMBER DEFAULT 1,
+UTIL_HW     NUMBER(10,2) GENERATED ALWAYS AS (MAX_TPS / MAX_CAP_HW) VIRTUAL,
+UTIL_SW     NUMBER(10,2) GENERATED ALWAYS AS (MAX_TPS / MAX_CAP_SW) VIRTUAL,
+ARCHIVO     VARCHAR2(500 CHAR) NOT NULL) NOLOGGING;
 --PARTITION BY RANGE (START_DTIME) 
 --INTERVAL(NUMTODSINTERVAL (1, 'DAY'))
 --(  
@@ -41,26 +41,28 @@ ARCHIVO     varchar2(500 char))nologging;
 -- drop table TEC_CE_CDC_TPS_AUX_TEMPLATE;
 
 create table TEC_CE_CDC_TPS_AUX_TEMPLATE(
---ID_COL      varchar2(32 char),
-START_DTIME	varchar2(20 char),
-END_DTIME	  varchar2(20 char),
-PAIS        varchar2(3 char),
-MAX_TPS	    number,
-MAX_CAP_HW  number,
-MAX_CAP_SW  number,
-UTIL_HW     number(10,2) generated always as (MAX_TPS / MAX_CAP_HW) virtual,
-UTIL_SW     number(10,2) generated always as (MAX_TPS / MAX_CAP_SW) virtual) nologging;
+START_DTIME	VARCHAR2(20 CHAR),
+END_DTIME	  VARCHAR2(20 CHAR),
+PAIS        VARCHAR2(20 CHAR),
+MAX_TPS	    NUMBER,
+MAX_CAP_HW  NUMBER DEFAULT 1,
+MAX_CAP_SW  NUMBER DEFAULT 1
+--UTIL_HW     NUMBER(10,2) GENERATED ALWAYS AS (MAX_TPS / MAX_CAP_HW) VIRTUAL,
+--UTIL_SW     NUMBER(10,2) GENERATED ALWAYS AS (MAX_TPS / MAX_CAP_SW) VIRTUAL
+) NOLOGGING;
 
 alter table TEC_CE_CDC_TPS_AUX_TEMPLATE add constraint TEC_CE_CDC_TPS_AUX_TEMPLATE_PK primary key (pais,start_dtime,end_dtime);
 --
 --
--- DROP TABLE TEC_CE_CDC_TPS_HOUR
+-- DROP TABLE TEC_CE_CDC_TPS_RAW
 --
 create table TEC_CE_CDC_TPS_RAW(
-START_DTIME	date not null enable,
-END_DTIME	  date not null enable,
-PAIS	      char(3 char)      not null enable,
-MAX_TPS	    number            not null enable);
+START_DTIME	DATE          NOT NULL ENABLE,
+END_DTIME	  DATE          NOT NULL ENABLE,
+PAIS	      CHAR(3 CHAR)  NOT NULL ENABLE,
+MAX_TPS	    NUMBER        NOT NULL ENABLE,
+MAX_CAP_HW  NUMBER        DEFAULT 1 NOT NULL ENABLE,
+MAX_CAP_SW  NUMBER        DEFAULT 1 NOT NULL ENABLE);
 --PARTITION BY RANGE (START_DTIME) 
 --INTERVAL(NUMTODSINTERVAL (1, 'DAY'))
 --(  
@@ -69,35 +71,52 @@ MAX_TPS	    number            not null enable);
 
 alter table TEC_CE_CDC_TPS_HOUR add constraint TEC_CE_CDC_TPS_HOUR_PK primary key (pais,start_dtime,end_dtime);
 
+-- DROP TABLE TEC_CE_CDC_TPS_HOUR;
 
 create table TEC_CE_CDC_TPS_HOUR(
-FECHA	  date not null enable,
-PAIS	  char(3 char)      not null enable,
-MAX_TPS number            not null enable
+  FECHA	      DATE          NOT NULL ENABLE,
+  PAIS	      CHAR(3 CHAR)  NOT NULL ENABLE,
+  MAX_TPS     NUMBER        NOT NULL ENABLE,
+  MAX_CAP_HW  NUMBER        DEFAULT 1 NOT NULL ENABLE,
+  MAX_CAP_SW  NUMBER        DEFAULT 1 NOT NULL ENABLE,
+  UTIL_HW     NUMBER(10,2) GENERATED ALWAYS AS (MAX_TPS / MAX_CAP_HW) VIRTUAL,
+  UTIL_SW     NUMBER(10,2) GENERATED ALWAYS AS (MAX_TPS / MAX_CAP_SW) VIRTUAL
 );
 
 alter table TEC_CE_CDC_TPS_HOUR add constraint TEC_CE_CDC_TPS_HOUR_PK primary key (PAIS,FECHA);
 
 create table TEC_CE_CDC_TPS_DAY(
-FECHA	  date not null enable,
-PAIS	  char(3 char)      not null enable,
-MAX_TPS number            not null enable
+  FECHA	      DATE          NOT NULL ENABLE,
+  PAIS	      CHAR(3 CHAR)  NOT NULL ENABLE,
+  MAX_TPS     NUMBER        NOT NULL ENABLE,
+  MAX_CAP_HW  NUMBER        NOT NULL ENABLE,
+  MAX_CAP_SW  NUMBER        NOT NULL ENABLE,
+  UTIL_HW     NUMBER(10,2)  NOT NULL ENABLE,
+  UTIL_SW     NUMBER(10,2)  NOT NULL ENABLE
 );
 
 alter table TEC_CE_CDC_TPS_DAY add constraint TEC_CE_CDC_TPS_DAY_PK primary key (PAIS,FECHA);
 
 create table TEC_CE_CDC_TPS_BH(
-FECHA	  date not null enable,
-PAIS	  char(3 char)      not null enable,
-MAX_TPS number            not null enable
+  FECHA	      DATE          NOT NULL ENABLE,
+  PAIS	      CHAR(3 CHAR)  NOT NULL ENABLE,
+  MAX_TPS     NUMBER        NOT NULL ENABLE,
+  MAX_CAP_HW  NUMBER        NOT NULL ENABLE,
+  MAX_CAP_SW  NUMBER        NOT NULL ENABLE,
+  UTIL_HW     NUMBER(10,2)  NOT NULL ENABLE,
+  UTIL_SW     NUMBER(10,2)  NOT NULL ENABLE
 );
 
 alter table TEC_CE_CDC_TPS_BH add constraint TEC_CE_CDC_TPS_BH_PK primary key (PAIS,FECHA);
 
 create table TEC_CE_CDC_TPS_IBHW(
-FECHA	  date not null enable,
-PAIS	  char(3 char)      not null enable,
-MAX_TPS number            not null enable
+  FECHA	      DATE          NOT NULL ENABLE,
+  PAIS	      CHAR(3 CHAR)  NOT NULL ENABLE,
+  MAX_TPS     NUMBER        NOT NULL ENABLE,
+  MAX_CAP_HW  NUMBER        NOT NULL ENABLE,
+  MAX_CAP_SW  NUMBER        NOT NULL ENABLE,
+  UTIL_HW     NUMBER(10,2)  NOT NULL ENABLE,
+  UTIL_SW     NUMBER(10,2)  NOT NULL ENABLE
 );
 
 alter table TEC_CE_CDC_TPS_IBHW add constraint TEC_CE_CDC_TPS_IBHW_PK primary key (PAIS,FECHA);
@@ -109,41 +128,62 @@ alter table TEC_CE_CDC_TPS_IBHW add constraint TEC_CE_CDC_TPS_IBHW_PK primary ke
 
 CREATE TABLE TEC_CE_CM_TPS_AUX (	
   START_DTIME VARCHAR2(20 CHAR), 
-  END_DTIME VARCHAR2(20 CHAR), 
-  PAIS CHAR(3 CHAR) GENERATED ALWAYS AS (CASE  
-                                          WHEN INSTR(ARCHIVO,'/arce/')<>0 THEN 'ARG' 
-                                          WHEN INSTR(ARCHIVO,'/pyce/')<>0 THEN 'PRY' 
-                                          WHEN INSTR(ARCHIVO,'/uyce/')<>0 THEN 'URY' 
-                                          ELSE 'S/P' 
-                                      END) VIRTUAL , 
-  MAX_TPS NUMBER, 
-  ARCHIVO VARCHAR2(500 CHAR)
-) nologging;
+  END_DTIME   VARCHAR2(20 CHAR), 
+  PAIS        CHAR(3 CHAR) GENERATED ALWAYS AS (CASE  
+                                                    WHEN INSTR(ARCHIVO,'/arce/')<>0 THEN 'ARG' 
+                                                    WHEN INSTR(ARCHIVO,'/pyce/')<>0 THEN 'PRY' 
+                                                    WHEN INSTR(ARCHIVO,'/uyce/')<>0 THEN 'URY' 
+                                                    ELSE 'S/P' 
+                                                END) VIRTUAL , 
+  MAX_TPS     NUMBER,
+  MAX_CAP_HW  NUMBER,
+  MAX_CAP_SW  NUMBER,
+  UTIL_HW     NUMBER(10,2) GENERATED ALWAYS AS (MAX_TPS / MAX_CAP_HW) VIRTUAL,
+  UTIL_SW     NUMBER(10,2) GENERATED ALWAYS AS (MAX_TPS / MAX_CAP_SW) VIRTUAL,
+  ARCHIVO     VARCHAR2(500 CHAR)
+) NOLOGGING;
 
 create table TEC_CE_CM_TPS_HOUR(
-  FECHA	  date not null enable,
-  PAIS	  char(3 char)      not null enable,
-  MAX_TPS number            not null enable
+  FECHA	      DATE              NOT NULL ENABLE,
+  PAIS	      CHAR(3 CHAR)      NOT NULL ENABLE,
+  MAX_TPS     NUMBER            NOT NULL ENABLE,
+  MAX_CAP_HW  NUMBER,
+  MAX_CAP_SW  NUMBER,
+  UTIL_HW     NUMBER(10,2),
+  UTIL_SW     NUMBER(10,2)
 );
 alter table TEC_CE_CM_TPS_HOUR add constraint TEC_CE_CM_TPS_HOUR_PK primary key (PAIS,FECHA);
 
 create table TEC_CE_CM_TPS_DAY(
-  FECHA	  date not null enable,
-  PAIS	  char(3 char)      not null enable,
-  MAX_TPS number            not null enable
+  FECHA	      DATE          NOT NULL ENABLE,
+  PAIS	      CHAR(3 CHAR)  NOT NULL ENABLE,
+  MAX_TPS     NUMBER        NOT NULL ENABLE,
+  MAX_TPS     NUMBER        NOT NULL ENABLE,
+  MAX_CAP_HW  NUMBER        NOT NULL ENABLE,
+  MAX_CAP_SW  NUMBER        NOT NULL ENABLE,
+  UTIL_HW     NUMBER(10,2)  NOT NULL ENABLE,
+  UTIL_SW     NUMBER(10,2)  NOT NULL ENABLE
 );
 alter table TEC_CE_CM_TPS_DAY add constraint TEC_CE_CM_TPS_DAY_PK primary key (PAIS,FECHA);
 
 create table TEC_CE_CM_TPS_BH(
-  FECHA	  date not null enable,
-  PAIS	  char(3 char)      not null enable,
-  MAX_TPS number            not null enable
+  FECHA	      DATE          NOT NULL ENABLE,
+  PAIS	      CHAR(3 CHAR)  NOT NULL ENABLE,
+  MAX_TPS     NUMBER        NOT NULL ENABLE,
+  MAX_CAP_HW  NUMBER        NOT NULL ENABLE,
+  MAX_CAP_SW  NUMBER        NOT NULL ENABLE,
+  UTIL_HW     NUMBER(10,2)  NOT NULL ENABLE,
+  UTIL_SW     NUMBER(10,2)  NOT NULL ENABLE
 );
 alter table TEC_CE_CM_TPS_BH add constraint TEC_CE_CM_TPS_BH_PK primary key (PAIS,FECHA);
 
 create table TEC_CE_CM_TPS_IBHW(
-  FECHA	  date not null enable,
-  PAIS	  char(3 char)      not null enable,
-  MAX_TPS number            not null enable
+  FECHA	      DATE          NOT NULL ENABLE,
+  PAIS	      CHAR(3 CHAR)  NOT NULL ENABLE,
+  MAX_TPS     NUMBER        NOT NULL ENABLE,
+  MAX_CAP_HW  NUMBER        NOT NULL ENABLE,
+  MAX_CAP_SW  NUMBER        NOT NULL ENABLE,
+  UTIL_HW     NUMBER(10,2)  NOT NULL ENABLE,
+  UTIL_SW     NUMBER(10,2)  NOT NULL ENABLE
 );
 alter table TEC_CE_CM_TPS_IBHW add constraint TEC_CE_CM_TPS_IBHW_PK primary key (PAIS,FECHA);
