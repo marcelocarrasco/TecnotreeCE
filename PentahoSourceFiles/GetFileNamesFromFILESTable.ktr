@@ -100,7 +100,8 @@
   </connection>
   <order>
   <hop> <from>File Names From FILES Table</from><to>Write to log</to><enabled>Y</enabled> </hop>
-  <hop> <from>Write to log</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>
+  <hop> <from>Write to log</from><to>Set P_FECHA_PROC Variable</to><enabled>Y</enabled> </hop>
+  <hop> <from>Set P_FECHA_PROC Variable</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Copy rows to result</name>
@@ -115,7 +116,7 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>704</xloc>
+      <xloc>816</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>
@@ -133,7 +134,7 @@
            <schema_name/>
            </partitioning>
     <connection>falda.claro.amx</connection>
-    <sql>SELECT	nombre_csv,&#xa;		to_char&#x28;to_date&#x28;substr&#x28;nombre_csv,-12,8&#x29;,&#x27;ddmmyyyy&#x27;&#x29;,&#x27;DD-MON-YYYY HH24&#x3a;MI&#x3a;SS&#x27;&#x29; P_FECHA_INI,&#xa;		0 P_RESULTADO&#xa;FROM files&#xa;WHERE status &#x3d; -1&#xa;AND procesado is null&#xa;AND nombre_csv like &#x27;&#x25;&#x2f;TecnotreeCE&#x2f;&#x25;CDC&#x25;&#x27;&#xa;--AND row_num &#x3d; 1</sql>
+    <sql>SELECT	nombre_csv,&#xa;		to_char&#x28;to_date&#x28;substr&#x28;nombre_csv,-12,8&#x29;,&#x27;ddmmyyyy&#x27;&#x29;,&#x27;DD-MON-YYYY HH24&#x3a;MI&#x3a;SS&#x27;&#x29; P_FECHA_INI,&#xa;		0 P_RESULTADO&#xa;FROM files&#xa;WHERE status &#x3d; 5&#xa;AND procesado is null&#xa;AND nombre_csv like &#x27;&#x25;&#x2f;TecnotreeCE&#x2f;&#x25;CDC&#x25;&#x27;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -177,6 +178,34 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>448</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set P_FECHA_PROC Variable</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <field_name>P_FECHA_INI</field_name>
+        <variable_name>P_FECHA_PROC</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value/>
+        </field>
+      </fields>
+    <use_formatting>Y</use_formatting>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>624</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>
