@@ -114,11 +114,11 @@
            <schema_name/>
            </partitioning>
     <connection>falda.claro.amx</connection>
-    <sql>SELECT	nombre_csv,&#xa;		to_char&#x28;to_date&#x28;substr&#x28;nombre_csv,-12,8&#x29;,&#x27;ddmmyyyy&#x27;&#x29;,&#x27;DD-MON-YYYY HH24&#x3a;MI&#x3a;SS&#x27;&#x29; P_FECHA_INI,&#xa;		0 P_RESULTADO&#xa;FROM files&#xa;WHERE status &#x3d; 5&#xa;AND procesado is null&#xa;AND nombre_csv like &#x27;&#x25;&#x2f;TecnotreeCE&#x2f;&#x25;CM_&#x25;&#x27;</sql>
+    <sql>SELECT	nombre_csv,&#xa;		to_char&#x28;to_date&#x28;substr&#x28;nombre_csv,-12,8&#x29;,&#x27;ddmmyyyy&#x27;&#x29;,&#x27;DD-MON-YYYY HH24&#x3a;MI&#x3a;SS&#x27;&#x29; P_FECHA_INI,&#xa;		0 P_RESULTADO&#xa;FROM files&#xa;WHERE status &#x3d; 5&#xa;AND procesado is null&#xa;AND nombre_csv like &#x27;&#x25;TecnotreeCE&#x2f;&#x25;CM_&#x25;_&#x24;&#x7b;FECHA&#x7d;.csv&#x27;&#xa;--&#x27;&#x25;&#x2f;TecnotreeCE&#x2f;&#x25;CM_&#x25;&#x27;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>Y</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>

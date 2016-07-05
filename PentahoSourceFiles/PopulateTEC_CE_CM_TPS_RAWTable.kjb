@@ -415,7 +415,7 @@
       <to>Populate TEC_CE_CM_TPS_RAW Table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>Y</enabled>
+      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -439,7 +439,7 @@
     </hop>
     <hop>
       <from>Test Arma Raw</from>
-      <to>Truncate TEC_CE_CM_TPS_RAW table</to>
+      <to>Populate TEC_CE_CM_TPS_RAW Table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
