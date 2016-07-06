@@ -1,46 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <job>
-  <name>ProcessCDCData</name>
+  <name>CDCArmaAux</name>
     <description/>
     <extended_description/>
     <job_version/>
-    <job_status>0</job_status>
   <directory>&#x2f;</directory>
   <created_user>-</created_user>
-  <created_date>2016&#x2f;07&#x2f;04 14&#x3a;35&#x3a;49.867</created_date>
+  <created_date>2016&#x2f;07&#x2f;06 12&#x3a;43&#x3a;35.343</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;07&#x2f;04 14&#x3a;35&#x3a;49.867</modified_date>
+  <modified_date>2016&#x2f;07&#x2f;06 12&#x3a;43&#x3a;35.343</modified_date>
     <parameters>
-        <parameter>
-            <name>FECHA</name>
-            <default_value>21012016</default_value>
-            <description/>
-        </parameter>
     </parameters>
-  <connection>
-    <name>falda.claro.amx</name>
-    <server>falda.claro.amx</server>
-    <type>ORACLE</type>
-    <access>Native</access>
-    <database>DSMART2</database>
-    <port>1521</port>
-    <username>mcarrasco</username>
-    <password>Encrypted 2be98afc86ae4938aa81cbc72db80a08b</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
-      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
     <slaveservers>
     </slaveservers>
 <job-log-table><connection/>
@@ -64,32 +34,12 @@
    <shared_objects_file/>
   <entries>
     <entry>
-      <name>START</name>
-      <description/>
-      <type>SPECIAL</type>
-      <start>Y</start>
-      <dummy>N</dummy>
-      <repeat>N</repeat>
-      <schedulerType>0</schedulerType>
-      <intervalSeconds>0</intervalSeconds>
-      <intervalMinutes>60</intervalMinutes>
-      <hour>12</hour>
-      <minutes>0</minutes>
-      <weekDay>1</weekDay>
-      <DayOfMonth>1</DayOfMonth>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>128</xloc>
-      <yloc>80</yloc>
-      </entry>
-    <entry>
-      <name>Populate TEC_CE_CDC_TPS_HOUR Table</name>
+      <name>Set P_FECHA_PROC</name>
       <description/>
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;PopulateTEC_CE_CDC_TPS_HOURTable.ktr</filename>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;SetVariables.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -113,55 +63,74 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>720</xloc>
-      <yloc>80</yloc>
+      <xloc>272</xloc>
+      <yloc>96</yloc>
       </entry>
     <entry>
-      <name>Populate TEC_CE_CDC_TPS_RAW Table</name>
+      <name>Populate TEC_CE_CDC_AUX_TEMPLATE Table</name>
       <description/>
-      <type>JOB</type>
+      <type>TRANS</type>
       <specification_method>filename</specification_method>
-      <job_object_id/>
-      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;PopulateTEC_CE_CDC_TPS_RAWTable.kjb</filename>
-      <jobname/>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;PopulateTEC_CE_CDC_AUX_TEMPLATETable.ktr</filename>
+      <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
       <set_logfile>N</set_logfile>
       <logfile/>
       <logext/>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <loglevel>Nothing</loglevel>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
       <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <follow_abort_remote>N</follow_abort_remote>
-      <expand_remote_job>N</expand_remote_job>
       <create_parent_folder>N</create_parent_folder>
-      <pass_export>N</pass_export>
+      <logging_remote_work>N</logging_remote_work>
       <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <set_append_logfile>N</set_append_logfile>
-      <parallel>N</parallel>
+      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
-      <yloc>80</yloc>
+      <xloc>560</xloc>
+      <yloc>96</yloc>
       </entry>
     <entry>
-      <name>Update MAX_CAP_HW &#x26; MAX_CAP_SW</name>
+      <name>Populate TEC_CE_CDC_TPS_AUX Table</name>
       <description/>
-      <type>SQL</type>
-      <sql>MERGE INTO TEC_CE_CDC_TPS_HOUR TA&#xa;USING&#x28;	SELECT	PAIS,&#xa;				MAX_CAP_HW,&#xa;				MAX_CAP_SW &#xa;		FROM SVA_OBJECTS &#xa;		WHERE TECNOLOGIA &#x3d; &#x27;TECNOTREECE&#x27; &#xa;		AND ACTIVO &#x3d; 1&#x29; SVA&#xa;ON &#x28;TA.PAIS &#x3d; SVA.PAIS&#x29;&#xa;WHEN MATCHED THEN&#xa; 	UPDATE SET	TA.MAX_CAP_HW &#x3d; SVA.MAX_CAP_HW, &#xa;				TA.max_cap_sw &#x3d; SVA.MAX_CAP_SW&#xa;  	WHERE TA.MAX_CAP_HW &#x3d; 1 &#xa;	AND TA.MAX_CAP_SW &#x3d; 1&#x3b;</sql>
-      <useVariableSubstitution>F</useVariableSubstitution>
-      <sqlfromfile>F</sqlfromfile>
-      <sqlfilename/>
-      <sendOneStatement>F</sendOneStatement>
-      <connection>falda.claro.amx</connection>
-      <parallel>N</parallel>
+      <type>TRANS</type>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>&#x24;&#x7b;Internal.Job.Filename.Directory&#x7d;&#x2f;PopulateTEC_CE_CDC_TPS_AUXTable.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>720</xloc>
-      <yloc>240</yloc>
+      <xloc>560</xloc>
+      <yloc>208</yloc>
       </entry>
     <entry>
       <name>Success</name>
@@ -170,14 +139,34 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>960</xloc>
-      <yloc>240</yloc>
+      <xloc>560</xloc>
+      <yloc>352</yloc>
+      </entry>
+    <entry>
+      <name>START</name>
+      <description/>
+      <type>SPECIAL</type>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>48</xloc>
+      <yloc>96</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
       <from>START</from>
-      <to>Populate TEC_CE_CDC_TPS_RAW Table</to>
+      <to>Set P_FECHA_PROC</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -185,8 +174,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Populate TEC_CE_CDC_TPS_RAW Table</from>
-      <to>Populate TEC_CE_CDC_TPS_HOUR Table</to>
+      <from>Set P_FECHA_PROC</from>
+      <to>Populate TEC_CE_CDC_AUX_TEMPLATE Table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -194,8 +183,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Populate TEC_CE_CDC_TPS_HOUR Table</from>
-      <to>Update MAX_CAP_HW &#x26; MAX_CAP_SW</to>
+      <from>Populate TEC_CE_CDC_AUX_TEMPLATE Table</from>
+      <to>Populate TEC_CE_CDC_TPS_AUX Table</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -203,7 +192,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Update MAX_CAP_HW &#x26; MAX_CAP_SW</from>
+      <from>Populate TEC_CE_CDC_TPS_AUX Table</from>
       <to>Success</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

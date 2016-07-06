@@ -65,7 +65,7 @@ for i in (select to_char(fecha,'DDMMYYYY') ff
             from (
               SELECT DISTINCT(TO_DATE(SUBSTR(NOMBRE_CSV,-12,8),'DDMMYYYY')) fecha
               FROM FILES
-              WHERE nombre_csv like '%TecnotreeCE/%CM%_'
+              WHERE nombre_csv like '%TecnotreeCE/%CDC%_'
               AND STATUS != 0
               ORDER BY 1)) loop
     linea := linea ||'"'||i.ff||'" ';
