@@ -62,8 +62,20 @@
     <partitionschemas>
     </partitionschemas>
     <slaveservers>
+         <slaveserver><name>falda.claro.amx</name><hostname>falda.claro.amx</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname>amba-proxy1.ctimovil.net</proxy_hostname><proxy_port>8083</proxy_port><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>localhost</name><hostname>localhost</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
     </slaveservers>
     <clusterschemas>
+        <clusterschema>
+          <name>localhost_cluster</name>
+          <base_port>8085</base_port>
+          <sockets_buffer_size>2000</sockets_buffer_size>
+          <sockets_flush_interval>5000</sockets_flush_interval>
+          <sockets_compressed>Y</sockets_compressed>
+          <dynamic>N</dynamic>
+          <slaveservers>
+          </slaveservers>
+        </clusterschema>
     </clusterschemas>
   <created_user>-</created_user>
   <created_date>2016&#x2f;06&#x2f;30 16&#x3a;52&#x3a;21.100</created_date>
@@ -79,7 +91,7 @@
     <server>&#x24;&#x7b;DB-HOST&#x7d;</server>
     <type>ORACLE</type>
     <access>Native</access>
-    <database>&#x24;&#x7b;DB-USER&#x7d;</database>
+    <database>&#x24;&#x7b;DB-NAME&#x7d;</database>
     <port>&#x24;&#x7b;DB-PORT&#x7d;</port>
     <username>&#x24;&#x7b;DB-USER&#x7d;</username>
     <password>&#x24;&#x7b;DB-PASSWORD&#x7d;</password>

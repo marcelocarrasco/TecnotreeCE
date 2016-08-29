@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>PopulateTEC_CE_CDC_TPS_AUXTable</name>
+    <name>PopulateTEC_CE_CM_TPS_AUXTable</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
     </parameters>
@@ -62,20 +63,8 @@
     <partitionschemas>
     </partitionschemas>
     <slaveservers>
-         <slaveserver><name>falda.claro.amx</name><hostname>falda.claro.amx</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname>amba-proxy1.ctimovil.net</proxy_hostname><proxy_port>8083</proxy_port><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
-         <slaveserver><name>localhost</name><hostname>localhost</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
     </slaveservers>
     <clusterschemas>
-        <clusterschema>
-          <name>localhost_cluster</name>
-          <base_port>8085</base_port>
-          <sockets_buffer_size>2000</sockets_buffer_size>
-          <sockets_flush_interval>5000</sockets_flush_interval>
-          <sockets_compressed>Y</sockets_compressed>
-          <dynamic>N</dynamic>
-          <slaveservers>
-          </slaveservers>
-        </clusterschema>
     </clusterschemas>
   <created_user>-</created_user>
   <created_date>2016&#x2f;06&#x2f;23 15&#x3a;53&#x3a;00.723</created_date>
@@ -115,9 +104,9 @@
   <hop> <from>CSV file input</from><to>Write to log 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Get NOMBRE_CSV from result</from><to>Write to log</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Sysdate Info</from><to>Add Status Ok constant</to><enabled>Y</enabled> </hop>
-  <hop> <from>Table TEC_CE_CDC_TPS_AUX output</from><to>Get Sysdate Info</to><enabled>Y</enabled> </hop>
+  <hop> <from>Table TEC_CE_CM_TPS_AUX output</from><to>Get Sysdate Info</to><enabled>Y</enabled> </hop>
   <hop> <from>Write to log</from><to>CSV file input</to><enabled>Y</enabled> </hop>
-  <hop> <from>Write to log 2</from><to>Table TEC_CE_CDC_TPS_AUX output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Write to log 2</from><to>Table TEC_CE_CM_TPS_AUX output</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add Status Ok constant</name>
@@ -268,7 +257,7 @@
     </step>
 
   <step>
-    <name>Table TEC_CE_CDC_TPS_AUX output</name>
+    <name>Table TEC_CE_CM_TPS_AUX output</name>
     <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -280,7 +269,7 @@
            </partitioning>
     <connection>falda.claro.amx</connection>
     <schema>&#x24;&#x7b;DB-SCHEMA&#x7d;</schema>
-    <table>TEC_CE_CDC_TPS_AUX</table>
+    <table>TEC_CE_CM_TPS_AUX</table>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
