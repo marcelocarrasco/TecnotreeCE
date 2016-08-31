@@ -67,7 +67,7 @@
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
       <set_logfile>Y</set_logfile>
-      <logfile>&#x24;&#x7b;TECNOTREE-HOME&#x7d;&#x2f;PentahoLogs&#x2f;populate_FILES_table_</logfile>
+      <logfile>&#x24;&#x7b;TECNOTREE-HOME&#x7d;&#x2f;PentahoLogs&#x2f;populate_FILES_table</logfile>
       <logext>log</logext>
       <add_date>Y</add_date>
       <add_time>N</add_time>
@@ -433,15 +433,6 @@
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Zip arce files</from>
-      <to>Calcular Sumarizaciones</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>N</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
