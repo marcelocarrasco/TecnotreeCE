@@ -63,8 +63,20 @@
     <partitionschemas>
     </partitionschemas>
     <slaveservers>
+         <slaveserver><name>falda.claro.amx</name><hostname>falda.claro.amx</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname>amba-proxy1.ctimovil.net</proxy_hostname><proxy_port>8083</proxy_port><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>localhost</name><hostname>localhost</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
     </slaveservers>
     <clusterschemas>
+        <clusterschema>
+          <name>localhost_cluster</name>
+          <base_port>8085</base_port>
+          <sockets_buffer_size>2000</sockets_buffer_size>
+          <sockets_flush_interval>5000</sockets_flush_interval>
+          <sockets_compressed>Y</sockets_compressed>
+          <dynamic>N</dynamic>
+          <slaveservers>
+          </slaveservers>
+        </clusterschema>
     </clusterschemas>
   <created_user>-</created_user>
   <created_date>2016&#x2f;06&#x2f;23 15&#x3a;53&#x3a;00.723</created_date>
@@ -107,6 +119,7 @@
   <hop> <from>Table TEC_CE_CM_TPS_AUX output</from><to>Get Sysdate Info</to><enabled>Y</enabled> </hop>
   <hop> <from>Write to log</from><to>CSV file input</to><enabled>Y</enabled> </hop>
   <hop> <from>Write to log 2</from><to>Table TEC_CE_CM_TPS_AUX output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Update Ok</from><to>Execute SQL script</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add Status Ok constant</name>
@@ -416,6 +429,38 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>704</xloc>
       <yloc>128</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Execute SQL script</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>falda.claro.amx</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>Y</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>UPDATE FILES SET&#xa;	PROCESADO &#x3d; SYSDATE,&#xa;	STATUS &#x3d; 0&#xa;WHERE NOMBRE_CSV &#x3d; &#x27;&#x24;&#x7b;NOMBRE_CSV&#x7d;&#x27;&#xa;AND PROCESADO IS NULL&#xa;AND ROW_NUM &#x3d; 1</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>256</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

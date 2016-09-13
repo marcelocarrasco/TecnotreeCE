@@ -168,7 +168,7 @@
       <name>Zip arce files</name>
       <description/>
       <type>ZIP_FILE</type>
-      <zipfilename>&#x24;&#x7b;TECNOTREE-HOME&#x7d;&#x2f;Datos&#x2f;CSV&#x2f;rwk_arce.zip</zipfilename>
+      <zipfilename>&#x24;&#x7b;TECNOTREE-HOME&#x7d;&#x2f;Datos&#x2f;CSV&#x2f;rwk_arce_&#x24;&#x7b;FECHA_RWK&#x7d;.zip</zipfilename>
       <compressionrate>2</compressionrate>
       <ifzipfileexists>1</ifzipfileexists>
       <wildcard>.&#x2a;&#x24;&#x7b;FECHA_RWK&#x7d;&#x5c;.csv</wildcard>
@@ -179,7 +179,7 @@
       <addfiletoresult>N</addfiletoresult>
       <isfromprevious>N</isfromprevious>
       <createparentfolder>N</createparentfolder>
-      <adddate>Y</adddate>
+      <adddate>N</adddate>
       <addtime>N</addtime>
       <SpecifyFormat>N</SpecifyFormat>
       <date_time_format/>
@@ -196,10 +196,10 @@
       <name>Zip pyce files</name>
       <description/>
       <type>ZIP_FILE</type>
-      <zipfilename>&#x24;&#x7b;TECNOTREE-HOME&#x7d;&#x2f;Datos&#x2f;CSV&#x2f;rwk_pyce.zip</zipfilename>
+      <zipfilename>&#x24;&#x7b;TECNOTREE-HOME&#x7d;&#x2f;Datos&#x2f;CSV&#x2f;rwk_pyce_&#x24;&#x7b;FECHA_RWK&#x7d;.zip</zipfilename>
       <compressionrate>2</compressionrate>
       <ifzipfileexists>1</ifzipfileexists>
-      <wildcard>.&#x2a;&#x5c;.csv</wildcard>
+      <wildcard>.&#x2a;&#x24;&#x7b;FECHA_RWK&#x7d;&#x5c;.csv</wildcard>
       <wildcardexclude/>
       <sourcedirectory>&#x24;&#x7b;TECNOTREE-HOME&#x7d;&#x2f;Datos&#x2f;pyce&#x2f;tpsfiles</sourcedirectory>
       <movetodirectory/>
@@ -207,7 +207,7 @@
       <addfiletoresult>N</addfiletoresult>
       <isfromprevious>N</isfromprevious>
       <createparentfolder>N</createparentfolder>
-      <adddate>Y</adddate>
+      <adddate>N</adddate>
       <addtime>N</addtime>
       <SpecifyFormat>N</SpecifyFormat>
       <date_time_format/>
@@ -224,10 +224,10 @@
       <name>Zip uyce files</name>
       <description/>
       <type>ZIP_FILE</type>
-      <zipfilename>&#x24;&#x7b;TECNOTREE-HOME&#x7d;&#x2f;Datos&#x2f;CSV&#x2f;rwk_uyce.zip</zipfilename>
+      <zipfilename>&#x24;&#x7b;TECNOTREE-HOME&#x7d;&#x2f;Datos&#x2f;CSV&#x2f;rwk_uyce_&#x24;&#x7b;FECHA_RWK&#x7d;.zip</zipfilename>
       <compressionrate>2</compressionrate>
       <ifzipfileexists>1</ifzipfileexists>
-      <wildcard>.&#x2a;&#x5c;.csv</wildcard>
+      <wildcard>.&#x2a;&#x24;&#x7b;FECHA_RWK&#x7d;&#x5c;.csv</wildcard>
       <wildcardexclude/>
       <sourcedirectory>&#x24;&#x7b;TECNOTREE-HOME&#x7d;&#x2f;Datos&#x2f;uyce&#x2f;tpsfiles</sourcedirectory>
       <movetodirectory/>
@@ -235,7 +235,7 @@
       <addfiletoresult>N</addfiletoresult>
       <isfromprevious>N</isfromprevious>
       <createparentfolder>N</createparentfolder>
-      <adddate>Y</adddate>
+      <adddate>N</adddate>
       <addtime>N</addtime>
       <SpecifyFormat>N</SpecifyFormat>
       <date_time_format/>
@@ -278,8 +278,8 @@
       </parameters>      <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>864</xloc>
-      <yloc>384</yloc>
+      <xloc>704</xloc>
+      <yloc>480</yloc>
       </entry>
     <entry>
       <name>Set Environment Rework</name>
@@ -314,6 +314,51 @@
       <xloc>96</xloc>
       <yloc>64</yloc>
       </entry>
+    <entry>
+      <name>Write to ZipArce files</name>
+      <description/>
+      <type>WRITE_TO_FILE</type>
+      <filename>&#x24;&#x7b;TECNOTREE-HOME&#x7d;&#x2f;PentahoLogs&#x2f;zip_arce_files.log</filename>
+      <createParentFolder>Y</createParentFolder>
+      <appendFile>N</appendFile>
+      <content>No se encontraron archivos para comprimir u ocurrio un error.</content>
+      <encoding>UTF-8</encoding>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>576</xloc>
+      <yloc>176</yloc>
+      </entry>
+    <entry>
+      <name>Write to ZipPyce files</name>
+      <description/>
+      <type>WRITE_TO_FILE</type>
+      <filename>&#x24;&#x7b;TECNOTREE-HOME&#x7d;&#x2f;PentahoLogs&#x2f;zip_pyce_files.log</filename>
+      <createParentFolder>Y</createParentFolder>
+      <appendFile>N</appendFile>
+      <content>No se encontraron archivos para comprimir.</content>
+      <encoding>UTF-8</encoding>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>560</xloc>
+      <yloc>272</yloc>
+      </entry>
+    <entry>
+      <name>Write to ZipUyce file</name>
+      <description/>
+      <type>WRITE_TO_FILE</type>
+      <filename>&#x24;&#x7b;TECNOTREE-HOME&#x7d;&#x2f;PentahoLogs&#x2f;zip_uyce_files.log</filename>
+      <createParentFolder>Y</createParentFolder>
+      <appendFile>N</appendFile>
+      <content>No se encontraron archivos para comprimir.</content>
+      <encoding>UTF-8</encoding>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>544</xloc>
+      <yloc>384</yloc>
+      </entry>
   </entries>
   <hops>
     <hop>
@@ -339,7 +384,7 @@
       <to>Zip pyce files</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -348,7 +393,7 @@
       <to>Zip uyce files</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -366,7 +411,7 @@
       <to>Calcular Sumarizaciones Rework</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
@@ -399,6 +444,51 @@
     </hop>
     <hop>
       <from>Zip arce files</from>
+      <to>Write to ZipArce files</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Write to ZipArce files</from>
+      <to>Zip pyce files</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Zip pyce files</from>
+      <to>Write to ZipPyce files</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Write to ZipPyce files</from>
+      <to>Zip uyce files</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Zip uyce files</from>
+      <to>Write to ZipUyce file</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Write to ZipUyce file</from>
       <to>Calcular Sumarizaciones Rework</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
