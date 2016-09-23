@@ -62,8 +62,20 @@
     <partitionschemas>
     </partitionschemas>
     <slaveservers>
+         <slaveserver><name>falda.claro.amx</name><hostname>falda.claro.amx</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname>amba-proxy1.ctimovil.net</proxy_hostname><proxy_port>8083</proxy_port><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
+         <slaveserver><name>localhost</name><hostname>localhost</hostname><port>8085</port><webAppName/><username>cluster</username><password>Encrypted 2be98afc86aa7f2e4cb1aa265cd86aac8</password><proxy_hostname/><proxy_port/><non_proxy_hosts/><master>N</master><sslMode>N</sslMode></slaveserver>
     </slaveservers>
     <clusterschemas>
+        <clusterschema>
+          <name>localhost_cluster</name>
+          <base_port>8085</base_port>
+          <sockets_buffer_size>2000</sockets_buffer_size>
+          <sockets_flush_interval>5000</sockets_flush_interval>
+          <sockets_compressed>Y</sockets_compressed>
+          <dynamic>N</dynamic>
+          <slaveservers>
+          </slaveservers>
+        </clusterschema>
     </clusterschemas>
   <created_user>-</created_user>
   <created_date>2016&#x2f;07&#x2f;04 15&#x3a;04&#x3a;01.472</created_date>
@@ -114,7 +126,7 @@
            <schema_name/>
            </partitioning>
     <connection>falda.claro.amx</connection>
-    <sql>SELECT	TO_DATE&#x28;FECHA,&#x27;DD-MM-YYYY HH24&#x27;&#x29; FECHA,&#xa;		PAIS,&#xa;		MAX_TPS&#xa;FROM	&#x28;&#xa;SELECT	TO_CHAR&#x28;START_DTIME,&#x27;DD-MON-YYYY HH24&#x27;&#x29; FECHA,&#xa;        PAIS,&#xa;        SUM&#x28;MAX_TPS&#x29; MAX_TPS&#xa;FROM TEC_CE_CM_TPS_RAW&#xa;WHERE TO_CHAR&#x28;START_DTIME,&#x27;DD-MON-YYYY&#x27;&#x29; &#x3d; substr&#x28;&#x27;&#x24;&#x7b;P_FECHA_PROC&#x7d;&#x27;,1,11&#x29;&#xa;GROUP BY TO_CHAR&#x28;start_dtime,&#x27;DD-MON-YYYY HH24&#x27;&#x29;,PAIS&#x29;</sql>
+    <sql>SELECT	TO_DATE&#x28;FECHA,&#x27;DD-MM-YYYY HH24&#x27;&#x29; FECHA,&#xa;		PAIS,&#xa;		MAX_TPS&#xa;FROM	&#x28;&#xa;SELECT	TO_CHAR&#x28;START_DTIME,&#x27;DD-MON-YYYY HH24&#x27;&#x29; FECHA,&#xa;        PAIS,&#xa;        MAX&#x28;MAX_TPS&#x29; MAX_TPS&#xa;FROM TEC_CE_CM_TPS_RAW&#xa;WHERE TO_CHAR&#x28;START_DTIME,&#x27;DD-MON-YYYY&#x27;&#x29; &#x3d; substr&#x28;&#x27;&#x24;&#x7b;P_FECHA_PROC&#x7d;&#x27;,1,11&#x29;&#xa;GROUP BY TO_CHAR&#x28;start_dtime,&#x27;DD-MON-YYYY HH24&#x27;&#x29;,PAIS&#x29;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
