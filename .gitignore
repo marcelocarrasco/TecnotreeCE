@@ -1,6 +1,7 @@
 #Logs
 /PentahoLogs/*
 *.log
+/ArregloHistoricos/*
 
 #Others
 /Datos/arce/tpsfiles/*
